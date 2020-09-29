@@ -47,9 +47,9 @@ public class LancamentoRepositoryTest {
         Funcionario funcionario = new Funcionario();
         funcionario.setCpf("123456");
         funcionario.setEmail("test@test.com");
-        funcionario.setName("Funcionario");
+        funcionario.setNome("Funcionario");
         funcionario.setSenha(PasswordUtils.gerarBCrypt("123456"));
-        funcionario.setPerdil(Perfil.ROLE_USUARIO);
+        funcionario.setPerfil(Perfil.ROLE_USUARIO);
 
         return funcionario;
     }
@@ -93,7 +93,7 @@ public class LancamentoRepositoryTest {
 
     @Test
     public void testBuscaLancamentosPorFuncionarioPaginado() {
-        Pageable pageable =  PageRequest.of(0,10);
+        Pageable pageable = PageRequest.of(0, 10);
         Page<Lancamento> lancamentos = this.lancamentoRepository.findByFuncionarioId(this.funcionarioId, pageable);
 
         Assert.assertEquals(3, lancamentos.getTotalElements());

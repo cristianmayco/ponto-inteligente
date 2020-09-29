@@ -3,7 +3,6 @@ package com.pontointeligente.pontointeligente.api.model;
 import com.pontointeligente.pontointeligente.api.enums.Tipo;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlAnyAttribute;
 import java.util.Date;
 
 @Entity

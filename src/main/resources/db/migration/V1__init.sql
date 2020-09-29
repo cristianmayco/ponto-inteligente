@@ -15,7 +15,7 @@ CREATE TABLE funcionario (
   nome varchar(255) NOT NULL,
   perfil varchar(255) NOT NULL,
   qtd_horas_almoco float DEFAULT NULL,
-  qtd_horas_trabalho_dia float DEFAULT NULL,
+  qtd_horas_trabalhada_dia float DEFAULT NULL,
   senha varchar(255) NOT NULL,
   valor_hora decimal(19,2) DEFAULT NULL,
   empresa_id bigint DEFAULT NULL

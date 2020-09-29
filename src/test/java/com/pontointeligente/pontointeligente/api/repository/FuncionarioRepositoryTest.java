@@ -5,9 +5,6 @@ import com.pontointeligente.pontointeligente.api.model.Empresa;
 import com.pontointeligente.pontointeligente.api.model.Funcionario;
 import com.pontointeligente.pontointeligente.api.utils.PasswordUtils;
 import org.junit.After;
-
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+
+import static org.junit.Assert.assertEquals;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -41,10 +40,10 @@ public class FuncionarioRepositoryTest {
         Funcionario funcionario = new Funcionario();
         funcionario.setCpf(CPF);
         funcionario.setEmail(EMAIL);
-        funcionario.setName("Funcionario");
+        funcionario.setNome("Funcionario");
         funcionario.setSenha(PasswordUtils.gerarBCrypt("123456"));
         funcionario.setEmpresa(obterEmpresa());
-        funcionario.setPerdil(Perfil.ROLE_USUARIO);
+        funcionario.setPerfil(Perfil.ROLE_USUARIO);
 
         this.funcionarioRepository.save(funcionario);
     }

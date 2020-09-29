@@ -13,7 +13,7 @@ public class Funcionario {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String name;
+    private String nome;
     private String email;
     private String senha;
     private String cpf;
@@ -24,7 +24,7 @@ public class Funcionario {
     @Column(name = "qtd_horas_almoco")
     private Float qtdHorasAlmoco;
     @Enumerated(EnumType.STRING)
-    private Perfil perdil;
+    private Perfil perfil;
     @Column(name = "data_criacao")
     private Date dataCriacao;
     @Column(name = "data_atualizacao")
@@ -42,12 +42,12 @@ public class Funcionario {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNome() {
+        return nome;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getEmail() {
@@ -98,12 +98,12 @@ public class Funcionario {
         this.qtdHorasAlmoco = qtdHorasAlmoco;
     }
 
-    public Perfil getPerdil() {
-        return perdil;
+    public Perfil getPerfil() {
+        return perfil;
     }
 
-    public void setPerdil(Perfil perdil) {
-        this.perdil = perdil;
+    public void setPerfil(Perfil perfil) {
+        this.perfil = perfil;
     }
 
     public Date getDataCriacao() {
@@ -154,14 +154,14 @@ public class Funcionario {
     public String toString() {
         return "Funcionario{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", nome='" + nome + '\'' +
                 ", email='" + email + '\'' +
                 ", senha='" + senha + '\'' +
                 ", cpf='" + cpf + '\'' +
                 ", valorHora=" + valorHora +
                 ", qtdHorasTrabalhadaDia=" + qtdHorasTrabalhadaDia +
                 ", qtdHorasAlmoco=" + qtdHorasAlmoco +
-                ", perdil=" + perdil +
+                ", perfil=" + perfil +
                 ", dataCriacao=" + dataCriacao +
                 ", dataAtualizacao=" + dataAtualizacao +
                 ", empresa=" + empresa +
