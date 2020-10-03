@@ -16,6 +16,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.*;
@@ -54,9 +55,8 @@ public class LancamentoController {
         log.info("Buscando lançamentos por ID fdo funcionário: {}, página: {}", funcionarioId, pag);
         Response<Page<LancamentoDto>> response = new Response<Page<LancamentoDto>>();
 
-//        PageRequest pageRequest = PageRequest.of(pag, this.qtdPorPagina, Sort.by(ord).and(Sort.by(dir)));
         PageRequest pageRequest =
-                 PageRequest.of(pag, this.qtdPorPagina, Sort.Direction.fromString(dir),ord);
+                PageRequest.of(pag, this.qtdPorPagina, Sort.Direction.fromString(dir), ord);
 
         Page<Lancamento> lancamentos = this.lancamentoService.buscaPorFuncionarioId(funcionarioId, pageRequest);
         Page<LancamentoDto> lancamentoDtos = lancamentos.map(lancamento -> this.converterLancamentosDto(lancamento));
@@ -161,20 +161,22 @@ public class LancamentoController {
 
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Response<String>> remover(@PathVariable("id") Long id){
+    @PreAuthorize("hasAnyRole('ADMIN')")
+    public ResponseEntity<Response<String>> remover(@PathVariable("id") Long id) {
         log.info("Removendo lançamento: {}", id);
-        Response<String> response =  new Response<String>();
-        Optional<Lancamento> lancamento =  this.lancamentoService.buscaPorId(id);
+        Response<String> response = new Response<String>();
+        Optional<Lancamento> lancamento = this.lancamentoService.buscaPorId(id);
 
-        if(!lancamento.isPresent()){
+        if (!lancamento.isPresent()) {
             log.info("Erro ao remover devido ao lançamento id: {} ser inválido", id);
-            response.getErros().add("Erro ao remover lançamento. Registro não encontrado para o id: "+ id);
+            response.getErros().add("Erro ao remover lançamento. Registro não encontrado para o id: " + id);
             return ResponseEntity.badRequest().body(response);
         }
 
         this.lancamentoService.remover(id);
         return ResponseEntity.ok(new Response<String>());
     }
+
     private Lancamento converterDtoParaLancamento(
             LancamentoDto lancamentoDto,
             BindingResult result) throws ParseException {
