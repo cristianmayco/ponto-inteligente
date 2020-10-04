@@ -2,6 +2,7 @@ package com.pontointeligente.pontointeligente.api.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -63,6 +64,9 @@ public class Empresa implements Serializable {
     }
 
     public List<Funcionario> getFuncionarios() {
+        if(this.funcionarios == null){
+            this.funcionarios =  new ArrayList<Funcionario>();
+        }
         return funcionarios;
     }
 

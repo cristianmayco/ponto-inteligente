@@ -4,6 +4,7 @@ import com.pontointeligente.pontointeligente.api.enums.Perfil;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -131,6 +132,9 @@ public class Funcionario {
     }
 
     public List<Lancamento> getLancamentos() {
+        if (this.lancamentos == null) {
+            this.lancamentos = new ArrayList<Lancamento>();
+        }
         return lancamentos;
     }
 
